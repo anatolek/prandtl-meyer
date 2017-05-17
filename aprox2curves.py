@@ -68,12 +68,18 @@ _lx1 = extract_data(f1, 0, scale1x)
 _lx2 = extract_data(f2, 0, scale2x)
 _ly1 = extract_data(f1, n1-1, scale1y)
 _ly2 = extract_data(f2, n2-1, scale2y)
-#ly1_f = interp1d(_lx1, _ly1)
+ly1_f = interp1d(_lx1, _ly1)
 #ly2_f = interp1d(_lx2, _ly2)
-ly1_f = interp1d(_lx1, _ly1, kind='quadratic')
-ly2_f = interp1d(_lx2, _ly2, kind='quadratic')
 ly1 = ly1_f(lx)
-ly2 = ly2_f(lx)
+#ly2 = ly2_f(lx)
+z = 0
+ly2 = []
+for _ in range (N):
+	if z < N/2:
+		ly2.append(_ly2[0])
+	else:
+		ly2.append(_ly2[3])
+	z+=1
 curv = open('Curves.txt', 'w')
 j = 0
 for _ in range (N):
