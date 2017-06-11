@@ -1,6 +1,8 @@
 #!/usr/bin/python3
+# Prandtl-Meyer (PM) Flow and Shock-Expansion (SE) Theory
 
 import math
+import os
 
 # Solution of the equation by the golden section
 tau = (math.sqrt(5.0) - 1.0) / 2.0 # ~0.618
@@ -27,7 +29,7 @@ def gold(f):
             y1 = f(x1)
     return (b + a) / 2.0
 
-# Shock-expansion (SE) theory
+# Parameters
 
 t = 0.00508                                 # chort length of doublewerge airfoil [m]
 c = 0.0508                                  # maximum thickness of doublewerge airfoil [m]
@@ -164,18 +166,22 @@ def ul(f, inf1, inf2):
 		i+=1
 	return 0
 
-Cd_ = open('Cd.txt', 'w')
-Cl_ = open('Cl.txt', 'w')
-L_D_ = open('L_D.txt', 'w')
-Ma_upper = open('Ma_upper.txt', 'w')
-Ma_lower = open('Ma_lower.txt', 'w')
-P_upper = open('P_upper.txt', 'w')
-P_lower = open('P_lower.txt', 'w')
-T_upper = open('T_upper.txt', 'w')
-T_lower = open('T_lower.txt', 'w')
-P_m = open('P_m.txt', 'w')
-Ma_m = open('Ma_m.txt', 'w')
-T_m = open('T_m.txt', 'w')
+
+if not os.path.exists('data'):
+    os.makedirs('data')
+
+Cd_ = open('data/Cd.txt', 'w')
+Cl_ = open('data/Cl.txt', 'w')
+L_D_ = open('data/L_D.txt', 'w')
+Ma_upper = open('data/Ma_upper.txt', 'w')
+Ma_lower = open('data/Ma_lower.txt', 'w')
+P_upper = open('data/P_upper.txt', 'w')
+P_lower = open('data/P_lower.txt', 'w')
+T_upper = open('data/T_upper.txt', 'w')
+T_lower = open('data/T_lower.txt', 'w')
+P_m = open('data/P_m.txt', 'w')
+Ma_m = open('data/Ma_m.txt', 'w')
+T_m = open('data/T_m.txt', 'w')
 
 Cd_.write('# grad	Cd\n')
 Cl_.write('# grad	Cl\n')
